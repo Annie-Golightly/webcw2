@@ -1,0 +1,37 @@
+<!-- This page allows the user to change their password and logout -->
+{% extends "base.html" %}
+{% block content %}
+
+<body>
+  <!-- Allows a different title to be passed in for each page -->
+    <h1 class="title">Profile</h1>
+    <p class="topText">Change password or logout</p>
+
+    <form action="" method="post" name="changePass">
+      {{ form.hidden_tag() }}
+  
+      {{form.current.label}}
+      {{ form.current(class_='form-control') }}
+      {% for error in form.current.errors %}
+       <div class="alert alert-danger" role="alert">
+          [{{ error }}]
+       </div>
+      {% endfor %}
+  
+      <!-- Each field in the database has a corresponding field in the form -->
+      {{form.new.label}}
+      {{ form.new(class_='form-control') }}
+      {% for error in form.new.errors %}
+      <div class="alert alert-danger" role="alert">
+        [{{ error }}]
+      </div>
+      {% endfor %}
+  
+  
+      <input type="submit" class="btn btn-secondary" value="Submit">
+  
+  </form>
+
+    <a href={{url_for('logout')}}>Logout</a>
+    
+{% endblock %}

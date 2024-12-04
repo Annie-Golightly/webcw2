@@ -1,0 +1,78 @@
+/* The CSS style sheet is mostly used to provide additional colours and sizing to text */
+
+h1.title{
+    text-align: center;
+    padding: 2.5%;
+}
+
+.navStyle{
+    background-color: #7abfff;
+    font-size:x-large;
+}
+
+.navbar-brand {
+    font-size: xx-large; 
+}
+
+.card{
+    font-size: larger;
+}
+
+p.topText{
+    font-size: x-large;
+    text-align: center;
+}
+
+.card-header{
+    background-color: #7abfff;
+}
+
+
+
+.changeLinks{
+    background-color: gray;
+}
+
+p.bottomText{
+    background-color: peachpuff;
+    text-align: center;
+    font-size: x-large;
+    padding:2.5%;
+
+}
+
+.mainImage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Used to start the image zoomed in and then zoom out */
+.zoom-image {
+    max-width: 100%;
+    height: auto;
+    transform: scale(1.5); 
+    transition: transform 2s ease-in-out;
+}
+
+.zoom-in {
+    transform: scale(1); 
+}
+
+.cards{
+ display: flex;   
+ flex-wrap: wrap;  
+ justify-content: flex-start;
+}
+.card-group{
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    width: 20%; 
+   
+} 
+
+

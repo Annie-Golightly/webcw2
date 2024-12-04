@@ -1,0 +1,57 @@
+
+{% extends "base.html" %}
+{% block content %}
+
+<body>
+ 
+    <h1 class="title">All gear</h1>
+    <p class="topText">Here is all of the gear owned by LUUHC</p>
+
+    <p></p>
+
+    <!-- Creates the drop down menu that shoes all of the gear options to select -->
+    <select id="dropdown" onchange="loadData()">
+      <option value="all">-- All gear --</option>
+      {%for gearType in distinctTypes%}
+      <option value="{{gearType.type.type}}">{{gearType.type.type}}</option> 
+      {%endfor%}
+      </select>
+      <p></p>
+
+
+    
+      <div class="card-header">Type, Size, Qty and Qty available</div>
+      <div class="card"></div>
+      {%for gear in allGear%}
+
+        <!-- Creates the cards for each gear item  -->
+          <div class="card-group" data-val="{{gear.type.type}}"> 
+          <div class="card"> 
+            <div class="card-body text-center">
+              <p class="card-text">{{gear.type.type}}</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body text-center">
+              <p class="card-text">{{gear.size.size}}</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body text-center">
+              <p class="card-text">{{gear.qtyTotal}}</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body text-center">
+              <p class="card-text">{{gear.qtyAvailable}}</p>
+            </div>
+          </div>
+          
+          
+        </div>
+        
+
+    {%endfor%}
+   
+</body>
+{% endblock %}

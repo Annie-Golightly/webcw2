@@ -1,0 +1,125 @@
+<!-- This page is used as the template for all other pages on the website -->
+ <!-- The basis for this template is taken from the worked through examples on the module website -->
+ <!DOCTYPE html>
+    <html lang="en">
+        <head>
+        
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        
+        <!-- Links to the CSS sheet I created -->
+        <link rel="stylesheet" href="/static/style.css">
+
+        <style>
+        ul#menu li {
+            display:inline;
+        }
+        </style>
+      
+        <title>{{ title }}</title> <!--The title for each page is loaded in through the views.py page-->
+        </head>
+
+        <body>
+          <!-- The navbar changes based on whether the user is logged in, an admin or not -->
+           {% if current_user.is_authenticated == false%}
+           <nav class="navbar navbar-expand-sm navbar-light navStyle"> 
+            <a class="navbar-brand" >Online Gear Store</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+       
+            <div class="collapse navbar-collapse" id="navbarSupportedContent"> <!--Allows shrunk navbar-->
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link ml-3 text-dark" href="/">Home <span class="sr-only">(current)</span></a></li>
+                <li class="nav-item"><a class="nav-link ml-3 text-dark" href="/login">Log in</a></li>
+                <li class="nav-item"><a class="nav-link ml-3 text-dark" href="/signup">Sign up</a></li>
+              </ul>
+            </div>
+          </nav>
+          
+          {%elif isAdmin%}
+          <nav class="navbar navbar-expand-sm navbar-light navStyle"> 
+            <a class="navbar-brand" >Online Gear Store</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+       
+            <div class="collapse navbar-collapse" id="navbarSupportedContent"> 
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link ml-3 text-dark" href="/">Home <span class="sr-only">(current)</span></a></li>
+                
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle ml-3 text-dark" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gear</a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item text-dark" href="/allGear">View all gear</a>
+                    <a class="dropdown-item text-dark" href="/borrowedGear">View borrowed gear</a>
+                  </div>
+                </li>
+                <li class="nav-item"><a class="nav-link ml-3 text-dark" href="/create">Add new gear</a></li>
+                <li class="nav-item"><a class="nav-link ml-3 text-dark" href="{{url_for('logout')}}">Logout</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+          {%else%}
+
+          <nav class="navbar navbar-expand-sm navbar-light navStyle"> 
+            <a class="navbar-brand" >Online Gear Store</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+       
+            <div class="collapse navbar-collapse" id="navbarSupportedContent"> 
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link ml-3 text-dark" href="/">Home <span class="sr-only">(current)</span></a></li>
+                
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle ml-3 text-dark" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gear</a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item text-dark" href="/gear">Borrow Gear</a>
+                    <a class="dropdown-item text-dark" href="/borrowed">Borrowed</a>
+                  </div>
+                </li>
+                <li class="nav-item"><a class="nav-link ml-3 text-dark" href="/profile">Profile</a></li>
+              </ul>
+            </div>
+          </nav>
+          {% endif %}
+
+          <!-- This sets up the sizing for the pages -->
+          <div>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-3"></div>
+                  <div class="col-6">
+                    <!-- Allows any flash messages to be displayed -->
+                    {% with messages = get_flashed_messages() %}
+                      {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-success">
+                             {{ message }}
+                        </div>
+                        {% endfor %}
+            
+                      {% endif %}
+                    {% endwith %}
+                    {% block content %}{% endblock %}
+                  </div>
+                </div>
+              </div>
+          </div>
+          
+
+          <!-- Optional JavaScript -->
+          <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+          <script src="/static/newScript.js"></script>
+          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  
+        </body>
+      </html>
+    

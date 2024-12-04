@@ -1,0 +1,59 @@
+
+{% extends "base.html" %}
+{% block content %}
+<head></head>
+<body>
+ 
+    <h1 class="title">Borrow Gear</h1>
+    <p class="topText">This displays all of the gear that is currently available for you to borrow</p>
+  <p></p>
+  
+  <!-- This is getting a dropdown of the different types of gear for the user to filter by -->
+  <select id="dropdown" onchange="loadData()">
+    <option value="all">-- All gear --</option>
+    {%for gearType in distinctTypes%}
+    <option value="{{gearType.type.type}}">{{gearType.type.type}}</option> 
+    {%endfor%}
+    </select>
+    <p></p>
+
+    
+      <div class="card-header">Type, Size and Qty available</div>
+      <div class="cards"></div>
+    {%for gear in availableGear%}
+
+    <!-- for each group, save the gear.type.type -->
+          <div class="card-group" data-val="{{gear.type.type}}"> 
+          <div class="card"> 
+            <div class="card-body text-center">
+              <p class="card-text">{{gear.type.type}}</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body text-center">
+              <p class="card-text">{{gear.size.size}}</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body text-center">
+              <p class="card-text">{{gear.qtyAvailable}}</p>
+            </div>
+          </div>
+          <div class="card"> 
+            <div class="card-body text-center">
+              <!-- User will borrow this gear -->
+               <a href="{{ url_for('borrow', gearID=gear.id)}}" class="btn btn-secondary btn-block">Borrow</a>
+            </div>
+          </div>
+          
+        </div>
+      
+        
+
+    {%endfor%}
+    
+{% endblock %}
+
+      </body>
+<!-- Kind of want to categorise by type - group fleeces together etc 
+     Allow users to select which type of gear they wish to view-->

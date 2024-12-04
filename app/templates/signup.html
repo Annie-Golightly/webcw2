@@ -1,0 +1,39 @@
+<!-- This page allows a new user to sign up -->
+{% extends "base.html" %}
+{% block content %}
+
+<body>
+  
+    <h1 class="title">Sign Up</h1>
+    
+    <form action="" method="post" name="signupForm">
+    {{ form.hidden_tag() }}
+
+    {{form.username.label}}
+    {{ form.username(class_='form-control') }}
+    {% for error in form.username.errors %}
+     <div class="alert alert-danger" role="alert">
+        [{{ error }}]
+     </div>
+    {% endfor %}
+
+    {{form.password1.label}}
+    {{ form.password1(class_='form-control') }}
+    {% for error in form.password1.errors %}
+    <div class="alert alert-danger" role="alert">
+      [{{ error }}]
+    </div>
+    {% endfor %}
+
+    {{form.password2.label}}
+    {{ form.password2(class_='form-control') }}
+    {% for error in form.password2.errors %}
+    <div class="alert alert-danger" role="alert">
+      [{{ error }}]
+    </div>
+    {% endfor %}
+
+    <input type="submit" class="btn btn-secondary" value="Submit">
+
+</form>
+{% endblock %}

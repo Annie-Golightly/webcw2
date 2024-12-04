@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+
+<body>
+    <h1 class="title">Borrowed Gear</h1>
+    <p class="topText">Here is all of the gear being leant out</p>
+
+    <p></p>
+
+    <!-- Allows the dropdown menu so the admin can filter which member they view -->
+    <select id="dropdown" onchange="loadUserData()">
+      <option value="all">-- All users --</option>
+      {%for user in users%}
+      <option value="{{user.username}}">{{user.username}}</option> 
+      {%endfor%}
+      </select>
+      <p></p>
+
+    
+      <div class="card-header">Type, Size, memberUsername, Qty borrowed, dateborrowed</div>
+      <div class="card"></div>
+      {%for borrow in vals%}
+
+    
+          <div class="card-group" data-val="{{borrow.member.username}}">
+          <div class="card"> 
+            <div class="card-body text-center">
+              <p class="card-text">{{borrow.gear.type.type}}</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body text-center">
+              <p class="card-text">{{borrow.gear.size.size}}</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body text-center">
+              <p class="card-text">{{borrow.member.username}}</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body text-center">
+              <p class="card-text">{{borrow.qtyBorrowed}}</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body text-center">
+              <p class="card-text">{{borrow.dateBorrowed}}</p>
+            </div>
+          </div>
+         
+          
+        </div>
+       
+
+    {%endfor%}
+   
+</body>
+{% endblock %}

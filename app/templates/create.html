@@ -1,0 +1,47 @@
+<!-- This page is used to create the form the admin fills out to create a new piece of gear -->
+{% extends "base.html" %}
+{% block content %}
+
+<body>
+  <h1 class="title">Add new gear</h1>
+<form action="" method="post" name="newGearForm">
+    {{ form.hidden_tag() }}
+
+    {{form.type.label}}
+    {{ form.type(class_='form-control') }}
+    {% for error in form.type.errors %}
+     <div class="alert alert-danger" role="alert">
+        [{{ error }}]
+     </div>
+    {% endfor %}
+
+    {{form.other.label}}
+    {{ form.other(class_='form-control') }}
+    {% for error in form.other.errors %}
+    <div class="alert alert-danger" role="alert">
+      [{{ error }}]
+    </div>
+    {% endfor %}
+
+    {{form.qty.label}}
+    {{ form.qty(class_='form-control') }}
+    {% for error in form.qty.errors %}
+    <div class="alert alert-danger" role="alert">
+      [{{ error }}]
+    </div>
+    {% endfor %}
+
+    {{form.size.label}}
+    {{ form.size(class_='form-control') }} 
+    {% for error in form.size.errors %}
+    <div class="alert alert-danger" role="alert">
+      [{{ error }}]
+    </div>
+    {% endfor %}
+
+    <input type="submit" class="btn btn-secondary" value="Submit">
+
+</form>
+{% endblock %}
+
+</body>
